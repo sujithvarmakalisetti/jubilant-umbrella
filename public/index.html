@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f5f0">
+    <title>Gold Price Prediction</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="site-shell">
+      <section id="predict-page" class="page prediction-page">
+        <article class="prediction-card">
+          <p class="eyebrow">MACHINE LEARNING PROJECT</p>
+          <h1>Gold Price Prediction</h1>
+          <p class="intro-copy">Enter the market values below to get a gold price estimate from a machine learning model.</p>
+
+          <form id="prediction-form">
+            <div class="field-grid">
+              <label class="field">
+                <span>SPX</span>
+                <input id="spx" name="SPX" type="number" step="any" required>
+              </label>
+              <label class="field">
+                <span>USO</span>
+                <input id="uso" name="USO" type="number" step="any" required>
+              </label>
+              <label class="field">
+                <span>SLV</span>
+                <input id="slv" name="SLV" type="number" step="any" required>
+              </label>
+              <label class="field">
+                <span>EUR/USD</span>
+                <input id="eurusd" name="EUR/USD" type="number" step="any" required>
+              </label>
+            </div>
+
+            <label class="model-picker">
+              <span>Prediction model</span>
+              <select id="model-choice" aria-label="Prediction model"></select>
+            </label>
+            <p class="model-hint">Linear Regression changes smoothly with input values. A Decision Tree can return the same result until a split threshold is crossed.</p>
+            <p id="artifact-warning" class="artifact-warning" role="status" hidden></p>
+
+            <button id="predict-button" class="button-primary" type="submit">Predict Gold Price</button>
+          </form>
+
+          <a class="analysis-link" href="#analysis" data-page="analysis-page">Explore the data analysis <span aria-hidden="true">→</span></a>
+          <p id="prediction-message" class="form-message" role="status" aria-live="polite"></p>
+
+          <section id="prediction-result" class="result-panel" aria-live="polite" hidden>
+            <p class="result-label">PREDICTION</p>
+            <p>Predicted Gold Price: <strong id="result-usd">—</strong> USD</p>
+            <p>Indian Rupee: <strong id="result-inr">—</strong> ₹</p>
+            <small id="result-model"></small>
+            <p id="result-warning" class="result-warning" role="status" hidden></p>
+          </section>
+        </article>
+      </section>
+
+      <section id="analysis-page" class="page analysis-page" hidden>
+        <a class="back-link" href="#prediction" data-page="predict-page">← Gold Price Prediction</a>
+        <div class="stat-grid">
+          <article class="stat-card"><span>Observations</span><strong id="stat-records">—</strong><small id="stat-dates">Daily records</small></article>
+          <article class="stat-card"><span>Average GLD</span><strong id="stat-mean">—</strong><small>Across the full dataset</small></article>
+          <article class="stat-card"><span>Observed range</span><strong id="stat-range">—</strong><small>Minimum to maximum GLD</small></article>
+          <article class="stat-card"><span>Test-set R²</span><strong id="stat-r2">—</strong><small>Linear regression, 20% test split</small></article>
+        </div>
+
+        <div id="dataset-notice" class="dataset-notice" role="status" hidden></div>
+
+        <section class="chart-section">
+          <div class="chart-heading">
+            <div><p class="eyebrow">01 / YEARLY TREND</p><h2>Annual average gold price</h2></div>
+            <span>GLD average by year, USD</span>
+          </div>
+          <div id="yearly-chart" class="chart-frame" aria-label="Annual average gold price"></div>
+          <p class="chart-caption">Prices climbed to a period high in 2012, then declined through 2015 before recovering modestly.</p>
+        </section>
+
+        <section class="chart-section">
+          <div class="chart-heading">
+            <div><p class="eyebrow">02 / MONTHLY DETAIL</p><h2>Average price by year and month</h2></div>
+            <span>Monthly mean GLD price, USD</span>
+          </div>
+          <div id="heatmap-chart" class="chart-frame heatmap-frame" aria-label="Average gold price by year and month"></div>
+          <p class="chart-caption">The 2018 series ends in May, matching the final date in the source dataset. Each cell shows the reported monthly average.</p>
+        </section>
+
+        <section class="chart-section">
+          <div class="chart-heading">
+            <div><p class="eyebrow">03 / MONTHLY TREND</p><h2>Gold price progression</h2></div>
+            <span>Monthly mean GLD, USD</span>
+          </div>
+          <div id="monthly-chart" class="chart-frame" aria-label="Monthly gold price progression"></div>
+          <p class="chart-caption">Hover over a point to inspect its month and average. The 2018 series includes January through May only.</p>
+        </section>
+
+        <section class="chart-section">
+          <div class="chart-heading">
+            <div><p class="eyebrow">04 / CALENDAR-MONTH PROFILE</p><h2>Average GLD level by month</h2></div>
+            <span>Mean of reported monthly means, USD</span>
+          </div>
+          <div id="calendar-chart" class="chart-frame" aria-label="Average gold price by calendar month"></div>
+          <p class="chart-caption">Each bar averages the available yearly monthly means; January through May include 2018, while June through December end in 2017.</p>
+        </section>
+
+        <section class="evaluation">
+          <div><span>Model evaluation</span><strong id="metric-mse">56.17</strong><small>Mean squared error</small></div>
+          <div><span>Test set</span><strong id="metric-r2">0.90</strong><small>Linear Regression R²</small></div>
+          <div><span>Prediction error</span><strong id="metric-rmse">7.49 USD</strong><small>Root mean squared error</small></div>
+          <p>Evaluation figures are the Linear Regression results reported in the PDF, not recalculated scores for the supplied model files.</p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
