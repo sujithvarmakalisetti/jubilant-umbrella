@@ -58,7 +58,7 @@ function wait(milliseconds) {
 }
 
 async function waitForBackend() {
-  const deadline = Date.now() + 10000
+  const deadline = Date.now() + 60000
   let lastError
 
   while (Date.now() < deadline) {
